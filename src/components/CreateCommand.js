@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import SideMenu from "./SideMenu";
 
 function CreateCommand() {
   const teamMembers = [
@@ -39,6 +40,8 @@ function CreateCommand() {
   ));
 
   return (
+    <div className="body">
+    <SideMenu />
     <div className="main-block">
       <div className="center-block">
         <div className="font-roboto bg-[#F9FAFB] min-h-screen">
@@ -106,6 +109,7 @@ function CreateCommand() {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 }

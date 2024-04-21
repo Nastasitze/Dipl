@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   render() {
@@ -6,11 +7,12 @@ class Header extends Component {
       <div className="header-cont">
         <div className="header-container-row-start">
           <div>
-            <div>
+            <div><Link to='/intensives'>
               <img
                 src="https://cdn.animaapp.com/projects/66178f6565c5717abaa98a66/releases/66179015c39a2cda9c36b812/img/vector---0.svg"
                 alt="logo"
               ></img>
+              </Link>
             </div>
           </div>
           <div>

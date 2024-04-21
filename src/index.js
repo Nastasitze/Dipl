@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import "./output.css";
 import App from './App';
+import {BrowserRouter} from 'react-router-dom';
 import Header from './components/Header';
 import reportWebVitals from './reportWebVitals';
 import SideMenu from './components/SideMenu';
@@ -15,14 +16,16 @@ import CreateCommand from './components/CreateCommand';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Header />
-    <div className='body'>
-    <SideMenu/>
-    <Intensives/>
+    <BrowserRouter>
+    <App></App>
+    </BrowserRouter>
+    {/* <div className='body'> */}
+    {/* <SideMenu/> */}
+    {/* <Intensives/> */}
     {/* <ListCreateIntensiv/> */}
     {/* <Commands/> */}
     {/* <CreateCommand/> */}
-    </div>
+    {/* </div> */}
 
   </React.StrictMode>
 );

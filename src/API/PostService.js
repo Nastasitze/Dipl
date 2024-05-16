@@ -1,15 +1,18 @@
+
 import axios from 'axios';
 
 export default class PostService {
 
     static async getIntensives(){
-        try{
-        const response = await axios.get('http://m.x09.ru/api/intensives/', {headers: {"Access-Control-Allow-Origin": "m.x09.ru"}})
-        console.log('УСПЕХ',response)
-        return response;
-        }
-        catch(err){
-            console.log('ОШИБКА', err)
-        }
+        const response = await axios.get('https://m.x09.ru/api/intensives/')
+    }
+    static async getCriteris(){
+        const response = await axios.get('https://m.x09.ru/api/criteria/')
+    }
+    static async getEvents(){
+        const response = await axios.get('https://m.x09.ru/api/events/')
+    }
+    static async getGroups(){
+        const response = await axios.get('https://m.x09.ru/api/groups/')
     }
 }

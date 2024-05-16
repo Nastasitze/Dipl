@@ -1,10 +1,23 @@
-"use client";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
 import SideMenu from "./SideMenu";
 
 
-function Commands() {
+class Commands extends Component {
+
+  constructor(props){
+  super(props);
+  // const id = withRouter((props)=>{
+  //   const id = props.match.params;
+  //   console.log("parametr: ", id) 
+  // })
+  // this.setState(studentId = window.location.href.split('/')[4])
+  // console.log(studentId);
+   
+  }
+  
+  
+  render(){
   return (<div className="body">
     <SideMenu />
     <div className="main-block">
@@ -40,7 +53,7 @@ function Commands() {
               ))}
             </div>
             <div className="flex">
-              <button className="button-classic"><Link to='/createCom'>
+              <button className="button-classic"><Link to={`/createCom/${this.studentId}`}>
                 Изменить состав команд</Link>
               </button>
             </div>
@@ -50,6 +63,7 @@ function Commands() {
     </div>
     </div>
   );
+}
 }
 
 

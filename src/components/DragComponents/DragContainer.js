@@ -5,20 +5,31 @@ import DraggingElement from "./DraggingElement";
 const DragContainer = ({teamName, func, team}) => {
   const [draggedElements, setDraggedElements] = useState([]);
 
-  const [{ isDragging }, dropRef] = useDrop({
+  useEffect(()=>{
+    return()=>{
+      func([...team, ...draggedElements ]);
+    }
+  },[])
+
+  const deleteItemFromCont=(item)=>{
+    func([...team, item ]);
+    setDraggedElements(draggedElements.filter(elem=>item.index!=elem.index))
+  }
+
+  const [{ isDragging, res }, dropRef] = useDrop({
     accept: "ball",
     drop(data) {
-      setDraggedElements([...draggedElements, data]);
+      if(!(draggedElements.find((item)=>item.index==data.index)))setDraggedElements([...draggedElements, data]);
       func(team.filter((item) => item.index !== data.index));
     },
     collect: (monitor) => ({
-      isDragging: monitor.isOver(),
+      isDragging: monitor.isOver()
     }),
   });
 
   return (
     <div
-      key={teamName}
+      key={'key'+team.length}
       ref={dropRef}
       className={
         isDragging
@@ -31,10 +42,10 @@ const DragContainer = ({teamName, func, team}) => {
         <span className="font-semibold text-[#333]">{teamName}</span>
       </div>
 
-      <span className="text-sm text-[#6B7280]">Нет участников</span>
+      {draggedElements.length ? '' : <span className="text-sm text-[#6B7280]">Нет участников</span>}
 
       {draggedElements.map((smile) => (
-        <DraggingElement key={smile.index} data={smile} />
+        <DraggingElement key={smile.index} data={smile} func={setDraggedElements} dragElements={draggedElements} deleteI={deleteItemFromCont}/>
       ))}
       <select className="mini-element-input-style">
         <option>Добавить участника</option>

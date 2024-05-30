@@ -1,10 +1,30 @@
-const DraggingElement = ({ data, onDrag }) => {
-    const onDragStart = () => {
-      onDrag(data);
+// import {krest} from './icons/krest';
+import { useDrag } from "react-dnd";
+const DraggingElement = ({ data, func, dragElements, deleteI }) => {
+
+    const deleteItem = () => {
+      func(dragElements.filter((item)=>item.index!=data.index));
     };
+
+    const [{ isDragStart, canDrag, endDrag }, dragRef] = useDrag({
+      type: "ball",
+      item: data,
+      collect: (monitor) => ({
+        isDragStart: monitor.isDragging(),
+        canDrag: monitor.canDrag(),
+      }),
+      end: (item, monitor) => {
+        const didDrop = monitor.didDrop();
+        const elem = monitor.getItem() == monitor.getDropResult().name;
+        if(didDrop){
+          deleteItem()
+        }
+      },
+    });
+
     return (
-      <div className="smile" draggable onDragStart={onDragStart}>
-        {data.content}
+      <div ref={dragRef} className="smile" draggable >
+        <span className="ml-4 text-sm element-st">{data.content}</span><button onClick={()=>{deleteI(data)}}>X</button>
       </div>
     );
   };

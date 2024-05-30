@@ -5,37 +5,75 @@ import DraggingElement from "./DragComponents/DraggingElement";
 import { useState, useEffect } from "react";
 import { useDrop } from "react-dnd";
 import DragContainer from "./DragComponents/DragContainer";
+import Modal from './ModalWindow'
 
 const base = [    
   { index: 0, content: 'Мындрила М.А,' },
-  { index: 1, content: 'Мындрила М.А,'},
-  { index: 2, content: 'Мындрила М.А,' },
-  { index: 3, content: 'Мындрила М.А,' },
-  { index: 4, content: 'Мындрила М.А,' },
-  { index: 5, content: 'Мындрила М.А,' },
-  { index: 6, content: 'Мындрила М.А,' },
+  { index: 1, content: 'Сындрила М.А,' },
+  { index: 2, content: 'Иындрила М.А,' },
+  { index: 3, content: 'Тындрила М.А,' },
+  { index: 4, content: 'Уындрила М.А,' },
+  { index: 5, content: 'Шындрила М.А,' },
+  { index: 6, content: 'Зындрила М.А,' },
   { index: 7, content: 'Мындрила М.А,' },
   { index: 8, content: 'Мындрила М.А,' },
   { index: 9, content: 'Мындрила М.А,' },
   { index: 10, content: 'Мындрила М.А,' }]
 
-const TEAM_NAMES = [{id:0, name:"Команда 1"}, {id:1, name:"Команда 2"}];
+const TEAM_NAMES = [{id:'Команда1', name:"Команда 1"}, {id:'Команда2', name:"Команда 2"}];
 
 
 function CreateCommand() {
   const [teamMembers, setTeamMembers] = useState([]);
+  const [countTeams, setCountTeams] = useState(2);
   const [teams, setTeams] = useState([]);
   const [selectedMembers, setSelectedMembers] = useState([]);
+
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('');
 
   useEffect(() => {
     setTeamMembers(base);
     setTeams(TEAM_NAMES);
+    setSearchResults(teamMembers);
   }, []);
+
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(()=>{
+    if(searchTerm) setSearchResults(teamMembers.filter(item =>
+      item.content.toLowerCase().includes(searchTerm.toLowerCase())))
+      else setSearchResults(teamMembers)
+  },[searchTerm,teamMembers])
+
+  const handleModalClose = (option) => {
+    setIsModalOpen(false);
+    // setSelectedOption(option);
+    // setTeams([]);
+    let massTeam = [];
+    for(let i=1 ; i<= countTeams; i++){
+      massTeam.push({id:`Команда`+i, name:`Команда ${i}`})
+    }
+    setTeams(massTeam)
+  };
+
+
+
+
 
   return (
     <div className="main-block">
       <div className="center-block">
         <div className="font-roboto bg-[#F9FAFB] min-h-screen">
+
+        <Modal isOpen={isModalOpen} onClose={handleModalClose} />
+        {/* <Modal></Modal> */}
+
           <div className="flex justify-between items-center max-w-6xl mx-auto">
             <div className="title">
               <div className="font-32">Команды</div>
@@ -52,10 +90,12 @@ function CreateCommand() {
             <div className="flex items-center space-x-2 mb-4  flex-row">
               <input
                 type="number"
+                onChange={(e)=>{setCountTeams(+e.target.value)}}
                 className="w-12 p-2 border border-[#D1D5DB] rounded-md text-center"
-                defaultValue={3}
+                // defaultValue={countTeams}
+                value={countTeams}
               />
-              <button className="button-classic">Изменить</button>
+              <button type="button" className="button-classic" onClick={()=>{setIsModalOpen(true)}} >Изменить</button>
             </div>
             <div className="flex gap margin-top">
 
@@ -71,8 +111,11 @@ function CreateCommand() {
                     выделенный список или переместить свободных участников в
                     команды с помощью drag and drop
                   </p>
-                  {TEAM_NAMES.map((teamName) => (
-                    <DragContainer key={teamName.id} teamName={teamName.name} func={setTeamMembers} team={teamMembers}/>))
+                  {teams.map((teamName) => {
+                    // console.log(teamName)
+                    return(
+                    <DragContainer key={teamName.id} teamName={teamName.name} func={setTeamMembers} team={teamMembers}/>)
+                  })
                     }
                 </div>
               </div>
@@ -87,11 +130,12 @@ function CreateCommand() {
                       type="text"
                       placeholder="Поиск"
                       className="w-full p-2 border-0"
+                      value={searchTerm} onChange={handleChange}
                     />
                   </div>
                   <div className="space-y-2">
                     <div className="container-free-students-list">
-                      {teamMembers.map((index) => (
+                      {searchResults.map((index) => (
                         <DragElement key={index.index} data={index} selectedMembers={selectedMembers} setSelectedMembers={setSelectedMembers}></DragElement>
                       ))}
                     </div>

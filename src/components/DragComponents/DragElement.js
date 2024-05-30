@@ -13,7 +13,7 @@ const DragElement = ({ data, setSelectedMembers, selectedMembers }) => {
 
   const handleClick = (data) => {
 
-    console.log('Привет');
+    
     
   };
 

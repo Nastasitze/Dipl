@@ -240,6 +240,17 @@
   gap: 10px;
 }
 
+.container-model-choose {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow-y: auto;
+  overflow-x: clip;
+  gap: 5px;
+  display: flex;
+  padding: 10px;
+  border: 1px dashed #637087;
+}
 
 .container-free-students-list {
   max-width: 30vw;

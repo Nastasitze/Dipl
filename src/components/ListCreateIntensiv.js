@@ -8,6 +8,8 @@ import { InputDeleteConteiner } from "./InputDeleteConteiner";
 import { SelectDescription } from "./SelectDescription";
 import { ChooseModal } from "./ChooseModal";
 
+const items=[{id:1,item:'Исаева'},{id:2,item:'Исаева'},{id:3,item:'Исаева'},{id:4,item:'Исаева'},{id:5,item:'Исаева'},{id:1,item:'Исаева'}];
+
 const ListCreateIntensiv = () => {
 
   const [showCrit, setShowCrit]=useState(false);
@@ -17,7 +19,7 @@ const ListCreateIntensiv = () => {
       <SideMenu />
       <div className="main-block">
         <div className="center-block">
-        {/* <ChooseModal /> */}
+        {/* <ChooseModal items={items}/> */}
           <div className="list-content column-container">
             <div className="title ">
               <div className="font-32">Создать мероприятие</div>

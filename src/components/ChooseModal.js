@@ -19,7 +19,9 @@ const ChooseModal = (props) => {
           className="w-full element-input-style"
         />
         <div className="container-model-choose w-full">
-          <span> Привет</span>
+            {
+                props.items.map((elem)=>( <div className="ml-4 text-sm element-st">{elem.item}</div>))
+            }
         </div>
       </div>
       <button className="button-classic">Сохранить</button>

@@ -1,53 +1,40 @@
-"use client";
 import React, { Component } from "react";
 import PostService from "../API/PostService";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-class Intensives extends Component {
-  constructor(props) {
-    super(props);
+const Intensives = () => {
 
-    this.state = {
-      filter:"all",
-      data: {
-        count: null,
-        next: null,
-        previous: null,
-        results: [
-          {
-            id: null,
-            group: [
-              {
-                id: null,
-                name: null,
-              },
-            ],
-            name: null,
-            description: null,
-            is_open: null,
-            open_dt: null,
-            close_dt: null,
-            created_at: null,
-            updated_at: null,
-          },
-        ],
-      },
+  const [data, setData]=useState(null);
+  const [filter, setFilter] = useState('All');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await PostService.getIntensives();
+      setData(response.data);
+      console.log('response.data',response.data)
+      console.log('data',data)
     };
 
-    this.handleFilterChange = this.handleFilterChange.bind(this);
+    fetchData();
+  }, []);
 
-  }
+  const fillIntensiveTable=()=> {
+    console.log('dataaaaa', data);
+    if (!data) {
+      return null; // или можно вернуть индикатор загрузки
+    }
 
-  fillIntensiveTable() {
-    let intensives = this.state.data.results.map((results) => (
-      
+    let intensives = data?.results.map((results) => (
       <tr key={results.id} className="border-b">
-        <td className="px-6 py-4 "><Link to={`/commands/${results.id}`}>{results.name}</Link></td>
+        <td className="px-6 py-4 ">
+          <Link to={`/commands/${results.id}`}>{results.name}</Link>
+        </td>
         <td className="px-6 py-4">{results.description}</td>
         <td className="px-6 py-4">{results.created_at}</td>
         <td className="px-6 py-4">{results.updated_at}</td>
         <td className="px-6 py-4">
-        {results.group.map((group)=>(group.name))}
+          {/* {results.group.map((group) => group.name).join(", ")} */}
         </td>
       </tr>
     ));
@@ -55,21 +42,13 @@ class Intensives extends Component {
     return intensives;
   }
 
-  componentDidMount() {
-    PostService.getIntensives().then((res) => {
-      this.setState({ data: res });
-    });
-  }
 
+  // const handleFilterChange=(event)=> {
+  //   this.setState({ filter: event.target.value });
+  // }
 
-  handleFilterChange(event){
-    this.setState({filter:event.target.value});
-  };
+  let intensives=fillIntensiveTable();
 
-
-  render() {
-
-    let intensives = this.fillIntensiveTable();
     return (
       <div className="main-block">
         <div className="center-block">
@@ -89,31 +68,32 @@ class Intensives extends Component {
               <div className="filter">
                 <button
                   value="active"
-                  onClick={this.handleFilterChange}
-                  className={`rounded-md py-2 px-4 ${this.state.filter === "active" ? "font-bold" : "" }`}>
+                  // onClick={this.handleFilterChange}
+                  // className={`rounded-md py-2 px-4 ${this.state.filter === "active" ? "font-bold" : ""}`}
+                  >
                   Актуальные
                 </button>
                 <button
                   value="past"
-                  onClick={this.handleFilterChange}
-                  className={`rounded-md py-2 px-4 ${this.state.filter === "past"? "font-bold" : ""}`}>
+                  // onClick={this.handleFilterChange}
+                  // className={`rounded-md py-2 px-4 ${this.state.filter === "past" ? "font-bold" : ""}`}
+                  >
                   Прошедшие
                 </button>
                 <button
                   value="all"
-                  onClick={this.handleFilterChange}
-                  className={`rounded-md py-2 px-4 ${this.state.filter === "all" ? "font-bold" : "" }`}>
+                  // onClick={this.handleFilterChange}
+                  // className={`rounded-md py-2 px-4 ${this.state.filter === "all" ? "font-bold" : ""}`}
+                  >
                   Все
                 </button>
                 <div className="common-line-filter">
-                  <div className={this.state.filter === "active"? "line-filter" : ""}></div>
-                <div className={this.state.filter === "past"? "line-filter" : ""}></div>
-                <div className={this.state.filter === "all"? "line-filter" : ""}></div> 
-                  {/* <div className="line-filter"></div> */}
+                  {/* <div className={this.state.filter === "active" ? "line-filter" : ""}></div> */}
+                  {/* <div className={this.state.filter === "past" ? "line-filter" : ""}></div> */}
+                  {/* <div className={this.state.filter === "all" ? "line-filter" : ""}></div> */}
                   <div className="black-line-filter"></div>
                 </div>
               </div>
-
               <div className="overflow-x-auto bg-white rounded-lg">
                 <table className="border rounded">
                   <thead className="bg-[#F1F5F9] border-b">
@@ -136,7 +116,13 @@ class Intensives extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                  {intensives}
+                    {intensives || (
+                      <tr>
+                        <td colSpan="5" className="px-6 py-4 text-center">
+                          Загрузка данных...
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -146,6 +132,6 @@ class Intensives extends Component {
       </div>
     );
   }
-}
+
 
 export default Intensives;

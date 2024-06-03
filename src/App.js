@@ -9,6 +9,7 @@ import Intensives from './components/Intensives';
 import Plan from "./components/Plan";
 import Commands from './components/Commands';
 import CreateCommand from './components/CreateCommand';
+import Authorization from "./pages/Authorization";
 import { Route,Routes } from "react-router-dom";
 import {DndProvider} from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
@@ -24,6 +25,7 @@ function App() {
   
 
   <Routes>
+    <Route path='/' element={<Authorization/>}></Route>
     <Route path='/intensives' element={<Intensives></Intensives>}></Route>
     <Route path='/plan' element={<Plan></Plan>}></Route>
     <Route path='/createInt' element={<ListCreateIntensiv></ListCreateIntensiv>}></Route>

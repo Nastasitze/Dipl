@@ -12,9 +12,6 @@ const DragElement = ({ data, setSelectedMembers, selectedMembers }) => {
   });
 
   const handleClick = (data) => {
-
-    
-    
   };
 
   return (

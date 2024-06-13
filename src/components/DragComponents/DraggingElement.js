@@ -1,4 +1,3 @@
-// import {krest} from './icons/krest';
 import { useDrag } from "react-dnd";
 const DraggingElement = ({ data, func, dragElements, deleteI }) => {
 

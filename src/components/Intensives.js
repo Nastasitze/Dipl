@@ -1,32 +1,42 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import PostService from "../API/PostService";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Context } from "../context";
 
 const Intensives = () => {
+
+  const [idSelectInsensive, setIdSelectInsensive] = useContext(Context);
+
+  useEffect(()=>{
+    console.log(idSelectInsensive);
+  },[idSelectInsensive]);
 
   const [data, setData]=useState(null);
   const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await PostService.getIntensives();
-      setData(response.data);
-      console.log('response.data',response.data)
-      console.log('data',data)
+      try{
+        await PostService.getIntensives().then((response)=>{setData(response.data)});
+      }catch(e){
+        console.log(e);
+      }
+      
     };
 
     fetchData();
+
+    setIdSelectInsensive(-1);
   }, []);
 
   const fillIntensiveTable=()=> {
-    console.log('dataaaaa', data);
     if (!data) {
       return null; // или можно вернуть индикатор загрузки
     }
 
     let intensives = data?.results.map((results) => (
-      <tr key={results.id} className="border-b">
+      <Link to={'/intensiv'} onClick={()=>{setIdSelectInsensive(results.id)}} className="border-b">
         <td className="px-6 py-4 ">
           <Link to={`/commands/${results.id}`}>{results.name}</Link>
         </td>
@@ -36,7 +46,7 @@ const Intensives = () => {
         <td className="px-6 py-4">
           {/* {results.group.map((group) => group.name).join(", ")} */}
         </td>
-      </tr>
+      </Link>
     ));
 
     return intensives;
@@ -56,7 +66,7 @@ const Intensives = () => {
             <div className="bg-[#FFFFFF] p-6 w-full flex flex-col">
               <div className="title font-32">Интенсивы</div>
               <button className="button-classic margin-right">
-                <Link to="/createInt"> Создать интенсив</Link>
+                <Link to={{pathname:'/createIntensive',propsNew:true}}> Создать интенсив</Link>
               </button>
 
               <div className="search-full-screen">

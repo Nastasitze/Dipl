@@ -452,3 +452,29 @@ table tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
 }
 
+.manageMenu{
+  grid-template-columns:1fr 1fr;
+  grid-auto-rows: max-content;
+  gap: 10px;
+}
+.manageMenu div{
+  height: max-content;
+}
+
+.elementWithButtonKrest{
+  background-color: #E8EDF2;
+  padding: 4px 8px;
+  border-radius: 10px;
+  max-width: max-content;
+  overflow: hidden;
+  text-wrap: nowrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  margin: 5px;
+}
+.gap_25{
+  gap:25px;
+}
+

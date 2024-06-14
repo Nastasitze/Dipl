@@ -16,7 +16,9 @@ const ManageRoles = () => {
         await PostService.getStudenRoles().then((res) => {
           setData(res.data.results);
         });
-      } catch {}
+      } catch {
+			
+		}
     };
 
     fetchData();
@@ -47,7 +49,6 @@ const ManageRoles = () => {
       } catch {}
     };
     setNewRole("");
-
     fetchData();
   };
 

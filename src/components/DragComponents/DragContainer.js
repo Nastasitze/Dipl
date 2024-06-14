@@ -16,7 +16,7 @@ const DragContainer = ({teamName, func, team}) => {
     setDraggedElements(draggedElements.filter(elem=>item.index!=elem.index))
   }
 
-  const [{ isDragging, res }, dropRef] = useDrop({
+  const [{ isDragging }, dropRef] = useDrop({
     accept: "ball",
     drop(data) {
       if(!(draggedElements.find((item)=>item.index==data.index)))setDraggedElements([...draggedElements, data]);

@@ -5,10 +5,10 @@ import "./output.css";
 import reportWebVitals from './reportWebVitals';
 import SideMenu from './components/SideMenu';
 import ListCreateIntensiv from './components/ListCreateIntensiv';
-import Intensives from './components/Intensives';
-import Plan from "./components/Plan";
+import Intensives from './pages/Intensives';
+import Plan from "./pages/Plan";
 import Commands from './components/Commands';
-import CreateCommand from './components/CreateCommand';
+import CreateCommand from './pages/CreateCommand';
 import Authorization from "./pages/Authorization";
 import { Route,Routes } from "react-router-dom";
 import {DndProvider} from 'react-dnd';
@@ -21,6 +21,7 @@ import { Context } from "./context";
 import ManageMenu from "./pages/ManageMenu";
 import ManageRoles from "./pages/ManageLists/ManageRole";
 import ManageProfile from "./pages/ManageLists/ManageProfile";
+import StatisticsIntensive from "./pages/StatisticsIntensive";
 
 var Roles = {
   Admin: 0
@@ -69,10 +70,9 @@ function App() {
           requiredAuthorization={true} accessUser={Roles.Admin}></Route>
     <Route path='/intensiv' element={<Intensiv id={idIntensive}/>} 
           requiredAuthorization={true} accessUser={Roles.Admin}></Route>
-    <Route path='/commands/:id' element={<Commands/>} 
+    <Route path='/commands' element={<Commands/>} 
           requiredAuthorization={true} accessUser={Roles.Admin}></Route>
-   <Route path='/createCom/:id' element={<DndProvider backend={HTML5Backend}><CreateCommand/></DndProvider>}></Route>
-
+   <Route path='/createCom' element={<DndProvider backend={HTML5Backend}><CreateCommand/></DndProvider>}></Route>
    <Route path='/editRoles' element={<ManageRoles />} 
           requiredAuthorization={true} accessUser={Roles.Admin}></Route>
   <Route path='/editProfile' element={<ManageProfile />} 
@@ -85,6 +85,8 @@ function App() {
           requiredAuthorization={true} accessUser={Roles.Admin}></Route>
   <Route path='/editStudents' element={<ManageRoles />} 
           requiredAuthorization={true} accessUser={Roles.Admin}></Route> */}
+	<Route path='/statisticsIntensive' element={<StatisticsIntensive />}
+				  requiredAuthorization={true}></Route>
   </Routes>
 
   </Context.Provider>

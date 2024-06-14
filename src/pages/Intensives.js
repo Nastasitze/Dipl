@@ -32,19 +32,15 @@ const Intensives = () => {
 
   const fillIntensiveTable=()=> {
     if (!data) {
-      return null; // или можно вернуть индикатор загрузки
+      return null;
     }
-
     let intensives = data?.results.map((results) => (
-      <Link to={'/intensiv'} onClick={()=>{setIdSelectInsensive(results.id)}} className="border-b">
-        <td className="px-6 py-4 ">
-          <Link to={`/commands/${results.id}`}>{results.name}</Link>
-        </td>
+		 <Link to={'/intensiv'} onClick={() => { setIdSelectInsensive(results.id) }} key={results.id} className="border-b">
+        <td className="px-6 py-4 ">{results.name}</td>
         <td className="px-6 py-4">{results.description}</td>
         <td className="px-6 py-4">{results.created_at}</td>
         <td className="px-6 py-4">{results.updated_at}</td>
         <td className="px-6 py-4">
-          {/* {results.group.map((group) => group.name).join(", ")} */}
         </td>
       </Link>
     ));

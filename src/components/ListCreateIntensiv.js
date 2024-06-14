@@ -86,12 +86,8 @@ const ListCreateIntensiv = (props) => {
       ).then(res=>{ setIdSelectInsensive(res.data.id)});
 
       if (response) {
-        
-        // Сохраняем токен в localStorage
-        // localStorage.setItem('token', token);
-        // Перенаправляем пользователя на защищенную страниц
-      } else {
-        alert("NOBODY");
+      } 
+		else {
       }
     } catch (error) {
       console.error(error);
@@ -172,35 +168,10 @@ const ListCreateIntensiv = (props) => {
                   />
                 </div>
 
-                {/* <div className="displey-row">
-                <InputDescription
-                  descriptionProp={"Время начала"}
-                  typeProp={"time"}
-                />
-                <InputDescription
-                  descriptionProp={"Время окончания"}
-                  typeProp={"time"}
-                />
-              </div> */}
-
-                {/* <div className="element-list-input">
-                <div className="font-18 bold-font">Результат мероприятия</div>
-              </div>
-              <div className="element-list-input column-container">
-                <InputRadioDescription showFunc={setShowCrit} />
-              </div>
-
-
-              <div className="element-list-input column-container">
-                {showCrit ? <InputDeleteConteiner /> : null}
-              </div> */}
-
                 <div className="element-list-input">
                   <div className="font-18 bold-font"> Участники</div>
                 </div>
-                {/* <SelectDescription descriptionProp={'Список учебных групп'}
-                option={[{ id: 1, Name: 'Учитель 1' }, { id: 2, Name: 'Учитель 2' }, { id: 3, Name: 'Учитель 4' }]} /> */}
-
+               
                 <div className="element-list-input column-container">
                   <div className="">Список преподаватель</div>
                   <button type="button" onClick={() => setWindowTeachers(true)}>

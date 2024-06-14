@@ -35,7 +35,7 @@ const Intensiv = (props) => {
           <div className="list-content column-container">
             <div className="title ">
               {data ? (
-                <div className="font-32">{data.name}</div>
+                <div className="font-32">{data?.name}</div>
               ) : (
                 <Skeleton></Skeleton>
               )}

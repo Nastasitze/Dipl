@@ -4,13 +4,8 @@ import './index.css';
 import "./output.css";
 import App from './App';
 import {BrowserRouter} from 'react-router-dom';
-import Header from './components/Header';
 import reportWebVitals from './reportWebVitals';
-import SideMenu from './components/SideMenu';
-import ListCreateIntensiv from './components/ListCreateIntensiv';
-import Intensives from './components/Intensives';
-import Commands from './components/Commands';
-import CreateCommand from './components/CreateCommand';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

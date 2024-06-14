@@ -9,13 +9,15 @@ const Authorization = () => {
     // console.log(JSON.stringify({email: login, password: pass}));
     e.preventDefault();
     try {
-      const response = PostService.postAuthorization(login,pass);
+		 const response =  await PostService.postAuthorization(login, pass);
       
       if (response) {
-        // Сохраняем токен в localStorage
-        // localStorage.setItem('token', token);
-        // Перенаправляем пользователя на защищенную страницу
-        window.location.href = '/intensives';
+      //   Сохраняем токен в localStorage
+      //   localStorage.setItem('token', token);
+      //   Перенаправляем пользователя на защищенную страницу
+			console.log(response)
+		  
+      //   window.location.href = '/intensives';
       } else {
         alert('NOBODY');
       }

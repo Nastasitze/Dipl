@@ -53,6 +53,10 @@
   font-size: 14px;
 }
 
+.font-16 {
+	font-size: 16px;
+}
+
 
 .font-32 {
   font-size: 32px;
@@ -76,6 +80,16 @@
   align-items: center;
   cursor: pointer;
 }
+.button-ser {
+	padding: 5px 10px;
+	border-radius: 12px;
+	background-color: #F0F2F5;
+	height: 34px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
 
 
 .side-menu-cont {
@@ -93,6 +107,10 @@
 .column-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+.space{
+	height: 5vh;
 }
 
 
@@ -130,6 +148,7 @@
   display: flex;
   /* background-color: #637087; */
   max-width: 1280px;
+	width:50vw;
   min-height: 100vh;
   justify-content: center;
 
@@ -476,5 +495,8 @@ table tr:last-child td:last-child {
 }
 .gap_25{
   gap:25px;
+}
+.align-center{
+	align-items: center;
 }
 

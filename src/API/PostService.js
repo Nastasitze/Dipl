@@ -102,6 +102,8 @@ export default class PostService {
     return response;
   }
 
+  //Страница редактирования профилей
+
   static async postProfiles(name) {
     const response = await axios.post("https://m.x09.ru/api/profiles/", {
       name: name,
@@ -113,4 +115,19 @@ export default class PostService {
     const response = await axios.delete(`https://m.x09.ru/api/profiles/${id}/`);
     return response;
   }
+
+	//Страница статистики
+	static async getStatisticsIntensiv(id) {
+		const response = await axios.get(`https://m.x09.ru/api/statistics/intensiv/${id}`, {
+			headers: "Authorization: Bearer " + PostService.getToken(),
+		});
+		return response;
+	}
+
+	static async getStatisticsCommand(id) {
+		const response = await axios.get(`https://m.x09.ru/api/statistics/command/${id}`, {
+			headers: "Authorization: Bearer " + PostService.getToken(),
+		});
+		return response;
+	}
 }

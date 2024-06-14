@@ -13,7 +13,10 @@ const InputRadio = (props) => {
         onChange={func}/>
       <label className="p-2" for={props.valueProp}>{props.descriptionProp}</label>
 
-      <div className={props.children && props.activeProp==props.valueProp ?'element-list-input column-container':'hidden'}>
+      <div className={props.children && props.activeProp==props.valueProp 
+												?'element-list-input column-container'
+												:'hidden'}>
+
         {props.children}
       </div>
     </div>

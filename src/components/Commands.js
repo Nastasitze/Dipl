@@ -53,7 +53,7 @@ class Commands extends Component {
               ))}
             </div>
             <div className="flex">
-              <button className="button-classic"><Link to={`/createCom/${this.studentId}`}>
+              <button className="button-classic"><Link to={`/createCom`}>
                 Изменить состав команд</Link>
               </button>
             </div>

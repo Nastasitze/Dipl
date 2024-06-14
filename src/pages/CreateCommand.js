@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import DragElement from "./DragComponents/DragElement";
-import DraggingElement from "./DragComponents/DraggingElement";
+import DragElement from "../components/DragComponents/DragElement";
 import { useState, useEffect } from "react";
 import { useDrop } from "react-dnd";
-import DragContainer from "./DragComponents/DragContainer";
-import Modal from './ModalWindow'
+import SideMenu from "../components/SideMenu";
+import DragContainer from '../components/DragComponents/DragContainer';
+import Modal from '../components/ModalWindow'
 
 const base = [    
   { index: 0, content: 'Мындрила М.А,' },
@@ -67,9 +67,11 @@ function CreateCommand() {
 
 
   return (
-    <div className="main-block">
-      <div className="center-block">
-        <div className="font-roboto bg-[#F9FAFB] min-h-screen">
+	  <div className="body">
+		  <SideMenu />
+		  <div className="main-block">
+			  <div className="center-block">
+        <div className="font-roboto min-h-screen">
 
         <Modal isOpen={isModalOpen} onClose={handleModalClose} />
         {/* <Modal></Modal> */}
@@ -150,6 +152,7 @@ function CreateCommand() {
         </div>
       </div>
     </div>
+	 </div>
   );
 }
 

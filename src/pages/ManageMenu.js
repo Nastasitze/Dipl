@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SideMenu from "../components/SideMenu";
+import arrow from '../icons/ArrowRight.svg';
 
 const ManageMenu = () => {
 
@@ -14,7 +15,16 @@ const ManageMenu = () => {
             <div className="grid manageMenu">
                 <div className="border border-radius p-4">
                     <h2 className="font-18 bold-font">Роли студентов</h2>
-                    <Link to={'/editRoles'} className="color-title font-14 p-4">Перейти к редактированию</Link>
+                    <Link to={'/editRoles'} className="color-title font-14 p-2 flex align-center gap">
+						  Перейти к редактированию
+								  <img
+									  height={10}
+									  width={13}
+									  loading="lazy"
+									  src={arrow}
+									  className="aspect-[0.96] fill-black"
+								  />
+								</Link>
                 </div>
                 <div className="border border-radius p-4">
                     <h2 className="font-18 bold-font">Студенты</h2>
